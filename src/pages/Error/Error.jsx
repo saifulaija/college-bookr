@@ -9,7 +9,7 @@ const Error = () => {
        <div className="text-center">
        <Link  to='/'>
         
-        <button className="bg-[#59bda2] px-2 rounded-lg text-xl py-1 text-white font-semibold ">Back To Home</button>
+        <button className="bg-yellow-500 px-2 rounded-lg text-xl py-1 text-white font-semibold ">Back To Home</button>
       
       </Link>
        </div>

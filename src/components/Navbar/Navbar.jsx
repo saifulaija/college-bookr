@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {  FaSearch, FaBars } from 'react-icons/fa';
 
 const Navbar = () => {
@@ -33,7 +33,7 @@ const Navbar = () => {
           <li>
           <NavLink
             to="/blog"
-            activeClassName="text-white font-bold"
+            activeClassName="text-red font-bold"
             className="text-white flex items-center"
           >
              Admissions
@@ -51,7 +51,7 @@ const Navbar = () => {
           <li>
           <NavLink
             to="/login"
-            activeClassName="text-white font-bold"
+            activeClassName="text-red-500 font-bold"
             className="text-white flex items-center"
           >
              Login
@@ -72,9 +72,9 @@ const Navbar = () => {
   )
 
   return (
-    <nav className="bg-[#33a688] py-4 px-8 md:px-16">
+    <nav className="bg-[#33a688] py-6 px-8 md:px-16">
       <div className="flex items-center justify-between">
-        <div className="text-white text-2xl font-bold">College</div>
+        <Link to='/'><h1 className="text-yellow-500 text-2xl font-bold">CollegeBookr</h1></Link>
 
         {/* Hamburger Menu for Small Devices */}
         <div className="md:hidden">
