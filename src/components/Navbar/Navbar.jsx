@@ -1,14 +1,27 @@
-import  { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import  { useContext, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import {  FaSearch, FaBars } from 'react-icons/fa';
+import { AuthContext } from '../../provider/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
+ const {user, logOut} = useContext(AuthContext)
+ const handleLogout = () => {
+  logOut()
+    .then(() => {
+      toast.success("Logout successful");
+      navigate('/')
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
   const navItem = (
       <>
        <li>
@@ -48,15 +61,26 @@ const Navbar = () => {
              My Colleges
           </NavLink>
           </li>
-          <li>
-          <NavLink
-            to="/login"
-            activeClassName="text-red-500 font-bold"
-            className="text-white flex items-center"
-          >
-             Login
-          </NavLink>
-          </li>
+          {
+            user ? <><Link to='/profile'  className="text-white flex items-center">{user?.displayName}</Link>   <li>
+            <NavLink
+              to="/blog"
+              activeClassName="text-red font-bold"
+              className="text-white flex items-center"
+              onClick={handleLogout}
+            >
+               Logout
+            </NavLink>
+            </li>  </> : <li>
+            <NavLink
+              to="/login"
+              activeClassName="text-red-500 font-bold"
+              className="text-white flex items-center"
+            >
+               Login
+            </NavLink>
+            </li>
+          }
           <li>
           <div className="bg-white flex items-center rounded-md px-2">
             <FaSearch className="text-gray-400" />
