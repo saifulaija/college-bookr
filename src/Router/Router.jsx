@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Error from "../pages/Error/Error";
 import Profile from "../pages/Profile/Profile";
+import DetailsPage from "../pages/DetailsPage/DetailsPage";
 const router = createBrowserRouter([
       {
             path:'/',
@@ -26,6 +27,12 @@ const router = createBrowserRouter([
                   {
                         path:'profile',
                         element:<Profile></Profile>
+                  },
+                  {
+                        path:'college/:id',
+                        element:<DetailsPage></DetailsPage>,
+                        loader:({params})=> fetch(`http://localhost:5000/college/${params.id}`)
+                       
                   }
             ]
       }

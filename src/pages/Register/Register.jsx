@@ -6,6 +6,7 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { toast } from "react-hot-toast";
+import { saveUser } from "../../api/auth";
 
 const Register = () => {
       const {createUser, updateUserProfile, signInGoogle, setLoading, signInGitHub} = useContext(AuthContext);
@@ -29,6 +30,8 @@ const Register = () => {
             updateUserProfile(name)
             .then(()=>{
                   toast.success('user create successfully')
+                  // save user
+                  saveUser(result.user)
                   navigate('/login')
             })
       })
@@ -42,6 +45,7 @@ const Register = () => {
       signInGoogle()
       .then(result=>{
         console.log(result.user);
+        saveUser(result.user)
         navigate(from, {replace: true})
       })
       .catch(err=>{
@@ -54,6 +58,7 @@ const Register = () => {
       signInGitHub()
         .then((result) => {
           console.log(result.user);
+          saveUser(result.user)
           navigate(from, { replace: true });
           toast.success('login successfully')
          
