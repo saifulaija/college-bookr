@@ -6,6 +6,13 @@ import Register from "../pages/Register/Register";
 import Error from "../pages/Error/Error";
 import Profile from "../pages/Profile/Profile";
 import DetailsPage from "../pages/DetailsPage/DetailsPage";
+import College from "../pages/College/College";
+import CollegeDetails from "../pages/CollegeDetails/CollegeDetails";
+import PrivateRoute from "./PrivateRouter";
+import Admission from "../pages/Admission/Admission";
+import AdmissionForm from "../pages/AdmissionForm/AdmissionForm";
+import MyCollege from "../pages/MyCollege/MyCollege";
+import ReviewForm from "../pages/Reviews/Reviews";
 const router = createBrowserRouter([
       {
             path:'/',
@@ -30,9 +37,38 @@ const router = createBrowserRouter([
                   },
                   {
                         path:'college/:id',
-                        element:<DetailsPage></DetailsPage>,
+                        element:<PrivateRoute><DetailsPage></DetailsPage></PrivateRoute>,
                         loader:({params})=> fetch(`http://localhost:5000/college/${params.id}`)
                        
+                  },
+                  {
+                        path:'college',
+                        element:<College></College>,
+                  },
+                  {
+                        path:'colleges/:id',
+                        element:<PrivateRoute><CollegeDetails></CollegeDetails></PrivateRoute>,
+                        loader:({params})=> fetch(`http://localhost:5000/college/${params.id}`)
+
+                  },
+                  {
+                        path:'admission',
+                        element:<Admission></Admission>
+                  },
+                  {
+                        path:'admission/:id',
+                        element:<AdmissionForm></AdmissionForm>,
+                        loader:({params})=> fetch(`http://localhost:5000/college/${params.id}`)
+
+                  },
+                  {
+                        path:'my-college',
+                        element:<MyCollege></MyCollege>
+                  },
+                  {
+                        path:'review/:id',
+                        element:<ReviewForm></ReviewForm>,
+                        loader: ({params}) => fetch(`http://localhost:5000/students/${params.id}`)
                   }
             ]
       }

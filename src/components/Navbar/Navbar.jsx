@@ -28,7 +28,7 @@ const Navbar = () => {
        <NavLink
             exact
             to="/"
-            activeClassName="text-white font-bold"
+           
             className="text-white flex items-center"
           >
             Home
@@ -36,8 +36,8 @@ const Navbar = () => {
        </li>
          <li>
          <NavLink
-            to="/blog"
-            activeClassName="text-white font-bold"
+            to="/college"
+           
             className="text-white flex items-center"
           >
              Colleges
@@ -45,8 +45,8 @@ const Navbar = () => {
          </li>
           <li>
           <NavLink
-            to="/blog"
-            activeClassName="text-red font-bold"
+            to="/admission"
+            
             className="text-white flex items-center"
           >
              Admissions
@@ -54,8 +54,8 @@ const Navbar = () => {
           </li>
           <li>
           <NavLink
-            to="/blog"
-            activeClassName="text-white font-bold"
+            to="/my-college"
+           
             className="text-white flex items-center"
           >
              My Colleges
@@ -65,7 +65,7 @@ const Navbar = () => {
             user ? <><Link to='/profile'  className="text-white flex items-center">{user?.displayName}</Link>   <li>
             <NavLink
               to="/blog"
-              activeClassName="text-red font-bold"
+             
               className="text-white flex items-center"
               onClick={handleLogout}
             >
@@ -74,7 +74,7 @@ const Navbar = () => {
             </li>  </> : <li>
             <NavLink
               to="/login"
-              activeClassName="text-red-500 font-bold"
+             
               className="text-white flex items-center"
             >
                Login
