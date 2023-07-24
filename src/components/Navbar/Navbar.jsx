@@ -74,10 +74,10 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-[#33a688] py-6 px-8 md:px-16">
+    <nav className="bg-[#33a688] py-6 px-8 md:px-16 border border-b-[1px] border-yellow-300">
       <div className="flex items-center justify-between">
         <Link to="/">
-          <h1 className="text-yellow-500 text-2xl font-bold">CollegeBookr</h1>
+          <h1 className="text-yellow-500 text-2xl font-bold font-serif">CollegeBookr</h1>
         </Link>
 
         {/* Hamburger Menu for Small Devices */}

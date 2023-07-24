@@ -11,7 +11,7 @@ const SingleCollege = ({ college }) => {
     _id
   } = college;
   return (
-    <div className="bg-white shadow-md rounded-lg p-4  mx-2 my-4">
+    <div className="bg-white shadow-md rounded-lg p-4 font-serif mx-2 my-4">
       <img
         src={collegeImage}
         alt={collegeName}

@@ -3,7 +3,8 @@ import CollegeCard from "../../components/CollegeCard/CollegeCard";
 
 import { useNavigation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import Loader from "../../components/Navbar/Loader/Loader";
+import Loader from "../../components/Loader/Loader";
+
 
 const College = () => {
   const [colleges, setColleges] = useState([]);

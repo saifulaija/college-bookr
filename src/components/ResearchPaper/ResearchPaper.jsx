@@ -15,7 +15,7 @@ const ResearchPaper = () => {
 
       return (
             <div className='w-full md:container md:mx-auto mt-10'>
-                   <h1 className='text-xl md:text-2xl lg:text-3xl text-center text-[#33a688] font-bold my-10 uppercase'>Students Research Paper</h1>
+                   <h1 className='text-xl md:text-2xl lg:text-3xl text-center text-yellow-500 font-bold my-10 uppercase'>Students Research Paper</h1>
                    <div className='grid md:grid-cols-3 gap-4'>
                         {
                               researches.map(research=><ResearchCard key={research._id} research={research}></ResearchCard>)

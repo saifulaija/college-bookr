@@ -73,7 +73,7 @@ const router = createBrowserRouter([
       },
       {
         path: "my-college",
-        element: <MyCollege></MyCollege>,
+        element: <PrivateRoute><MyCollege></MyCollege></PrivateRoute>,
       },
       {
         path: "review/:id",

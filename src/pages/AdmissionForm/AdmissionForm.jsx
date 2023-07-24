@@ -1,22 +1,37 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BsCalendar } from "react-icons/bs";
 import { FaUserAlt, FaEnvelope, FaPhone, FaImage } from "react-icons/fa";
 
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const AdmissionForm = () => {
+
+  const {user} = useContext(AuthContext)
+
+  const email = user?.email;
   const college = useLoaderData();
-  const {collegeImage, _id, admissionDate, collegeName, events, collegeDetails, sports, admissionProcess, researchHistory} = college
+  const {
+    collegeImage,
+    _id,
+    admissionDate,
+    collegeName,
+    events,
+    collegeDetails,
+    sports,
+    admissionProcess,
+    researchHistory,
+  
+  } = college;
 
   const navigate = useNavigate();
   console.log(college);
 
-  
   const [formData, setFormData] = useState({
     name: "",
     subject: "",
-    email: "",
+
     phoneNumber: "",
     dateOfBirth: "",
     image: "",
@@ -49,19 +64,30 @@ const AdmissionForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //     console.log(formData);
-    const studentData = { ...formData, collegeImage, collegeId: _id, admissionDate, collegeName, events, collegeDetails, sports, admissionProcess, researchHistory };
+    const studentData = {
+      ...formData,
+      collegeImage,
+      collegeId: _id,
+      admissionDate,
+      collegeName,
+      events,
+      collegeDetails,
+      sports,
+      admissionProcess,
+      researchHistory,
+      email
+    };
     console.log(studentData);
 
     fetch("http://localhost:5000/admission", {
       method: "POST",
       headers: {
-        "content-type":"application/json",
+        "content-type": "application/json",
       },
       body: JSON.stringify(studentData),
     })
       .then((res) => res.json())
       .then((result) => {
-        
         console.log(result);
         if (result.insertedId) {
           navigate("/admission");
@@ -124,29 +150,7 @@ const AdmissionForm = () => {
             />
           </div>
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Email
-          </label>
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaEnvelope className="h-5 w-5 text-gray-400" />
-            </span>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={FormData.email}
-              onChange={handleChange}
-              required
-              className="pl-10 block w-full py-2 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:border-blue-300 focus:outline-none"
-              placeholder="Enter your email"
-            />
-          </div>
-        </div>
+
         <div className="mb-4">
           <label
             htmlFor="phoneNumber"

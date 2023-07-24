@@ -15,7 +15,7 @@ const Feedback = () => {
 },[])
       return (
             <div className="w-full md:container mx-auto">
-                  <h1 className='text-xl md:text-2xl lg:text-3xl text-center text-[#33a688] my-10 font-bold mt-10 uppercase'>Students Reviews</h1>
+                  <h1 className='text-xl md:text-2xl lg:text-3xl text-center text-yellow-500 my-10 font-bold mt-10 uppercase'>Students Reviews</h1>
                   <div className="grid md:grid-cols-3 gap-4">
                         {
                               feedbacks.map(item=><FeedbackCard key={item._id} item={item}></FeedbackCard>)
