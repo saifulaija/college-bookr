@@ -1,14 +1,17 @@
 // src/components/Login.js
 
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { toast } from "react-hot-toast";
+import { saveUser } from "../../api/auth";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-  const { logIn, signInGoogle, resetPassword, signInGitHub } = useContext(AuthContext);
-  const [error, setError] = useState("");
+  const { logIn, signInGoogle, resetPassword, signInGitHub } =
+    useContext(AuthContext);
+
   const emailRef = useRef();
 
   const navigate = useNavigate();
@@ -24,8 +27,9 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        saveUser(result.user);
         toast.success("login successfully");
-        navigate('/')
+        navigate("/");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -37,9 +41,9 @@ const Login = () => {
     signInGitHub()
       .then((result) => {
         console.log(result.user);
+        saveUser(result.user);
         navigate(from, { replace: true });
-        toast.success('login successfully')
-       
+        toast.success("login successfully");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -50,8 +54,8 @@ const Login = () => {
     signInGoogle()
       .then((result) => {
         console.log(result.user);
+        saveUser(result.user);
         navigate(from, { replace: true });
-       
       })
       .catch((err) => {
         toast.error(err.message);
@@ -61,19 +65,23 @@ const Login = () => {
   // handle reset password
 
   const handleResetPassword = () => {
-    const email = emailRef.current.value
+    const email = emailRef.current.value;
 
     resetPassword(email)
-    .then(()=>{
-      toast.success('Please check your email for reset link')
-    })
-    .catch(err=>{
-      toast.error(err.message)
-    })
+      .then(() => {
+        toast.success("Please check your email for reset link");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
+      <Helmet>
+        <title>Login | College Bookr</title>
+      </Helmet>
+
       <form onSubmit={handleLogin} className="w-96 p-8 bg-white rounded shadow">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
         <div className="mb-4">
@@ -106,31 +114,31 @@ const Login = () => {
           Login
         </button>
         <div>
-        <button
-          onClick={handleResetPassword}
-          className="text-sm hover:underline hover:text-[#33a688]"
-        >
-          Forget password
-        </button>
+          <button
+            onClick={handleResetPassword}
+            className="text-sm hover:underline hover:text-[#33a688]"
+          >
+            Forget password
+          </button>
 
-        <h1 className="text-sm">
-          Are you new?{" "}
-          <span>
-            <Link to="/register" className="text-sm hover:underline">
-              Go to register
-            </Link>
-          </span>
-        </h1>
-        <div className="divider">OR</div>
-        <div className="text-center">
-          {" "}
-          <button onClick={handleGoogleSignIn}>
-            <FaGoogle></FaGoogle>
-          </button>
-          <button onClick={handleGitHubSignIn} className="ms-2">
-            <FaGithub></FaGithub>
-          </button>
-        </div>
+          <h1 className="text-sm">
+            Are you new?{" "}
+            <span>
+              <Link to="/register" className="text-sm hover:underline">
+                Go to register
+              </Link>
+            </span>
+          </h1>
+          <div className="divider">OR</div>
+          <div className="text-center">
+            {" "}
+            <button onClick={handleGoogleSignIn}>
+              <FaGoogle></FaGoogle>
+            </button>
+            <button onClick={handleGitHubSignIn} className="ms-2">
+              <FaGithub></FaGithub>
+            </button>
+          </div>
         </div>
       </form>
     </div>

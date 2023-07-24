@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import MyCollegeCard from "../../components/MyCollegeCard/MyCollegeCard";
+import { Helmet } from "react-helmet-async";
 
 
 const MyCollege = () => {
@@ -16,6 +17,9 @@ const MyCollege = () => {
       console.log(user.email);
       return (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <Helmet>
+                        <title>My college | College Bookr</title>
+                  </Helmet>
                   {
                         colleges.map(college=><MyCollegeCard key={college._id} college={college}></MyCollegeCard>)
                   }

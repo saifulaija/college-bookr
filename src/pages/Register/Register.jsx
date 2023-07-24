@@ -8,8 +8,9 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { toast } from "react-hot-toast";
 import { saveUser } from "../../api/auth";
 
+
 const Register = () => {
-      const {createUser, updateUserProfile, signInGoogle, setLoading, signInGitHub} = useContext(AuthContext);
+      const {createUser, updateUserProfile, signInGoogle, signInGitHub} = useContext(AuthContext);
       
       const navigate = useNavigate();
       const location = useLocation();
@@ -29,15 +30,19 @@ const Register = () => {
             console.log(loggedUser);
             updateUserProfile(name)
             .then(()=>{
+
+              saveUser(result.user)
                   toast.success('user create successfully')
                   // save user
-                  saveUser(result.user)
+
+                 
                   navigate('/login')
             })
       })
       .catch(err=>{
             toast.error(err.message)
       })
+      .catch(err=> console.log(err))
     }
 
     
